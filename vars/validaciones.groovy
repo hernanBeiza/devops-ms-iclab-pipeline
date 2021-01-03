@@ -73,7 +73,6 @@ def obtenerTipoDeRama(){
 	} else {
 		return "RAMA NO SOPORTADA"
 	}
-	echo tipo;
 	return tipo;
 }
 
