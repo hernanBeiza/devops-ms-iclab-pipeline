@@ -63,6 +63,7 @@ def obtenerTipoDeRama(){
 	echo "obtenerTipoDeRama";
 	def rama = BRANCH_NAME;
 	def tipo = "";
+	rama = rama.toUpperCase();
 	if(rama.contains("FEATURE")){
 		tipo = "FEATURE"
 	} else if(rama.contains("DEVELOP")){
