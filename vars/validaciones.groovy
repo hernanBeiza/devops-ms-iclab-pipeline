@@ -59,4 +59,17 @@ def verificarRama(){
 	}
 }
 
+def obtenerTipoDeRama(){
+	def rama = BRANCH_NAME;
+	if(rama.contains("FEATURE")){
+		return "FEATURE"
+	} else if(rama.contains("DEVELOP")){
+		return "DEVELOP";
+	} else if(rama.contains("RELEASE")){
+		return "RELEASE";
+	} else {
+		return "RAMA NO SOPORTADA"
+	}
+}
+
 return this;
