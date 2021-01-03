@@ -60,16 +60,19 @@ def verificarRama(){
 }
 
 def obtenerTipoDeRama(){
+	echo "obtenerTipoDeRama";
 	def rama = BRANCH_NAME;
+	def tipo = "";
 	if(rama.contains("FEATURE")){
-		return "FEATURE"
+		tipo = "FEATURE"
 	} else if(rama.contains("DEVELOP")){
-		return "DEVELOP";
+		tipo "DEVELOP";
 	} else if(rama.contains("RELEASE")){
-		return "RELEASE";
+		tipo "RELEASE";
 	} else {
 		return "RAMA NO SOPORTADA"
 	}
+	return tipo;
 }
 
 return this;
