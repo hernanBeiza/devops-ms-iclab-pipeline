@@ -32,7 +32,7 @@ def call(){
 			stage('Validar') {
 				steps {
 			      	script {
-				    	echo "iniciar"
+				    	echo "Validar"
 				    	env.ALUMNO="Hernán Beiza";
 						String paramHerramienta = params.paramHerramienta;
 				    	echo "paramHerramienta ${paramHerramienta}";
@@ -44,6 +44,14 @@ def call(){
 				    	if(validaciones.verificarRama()){}
 				    	def tipo = validaciones.obtenerTipoDeRama();
 				    	print tipo;
+				    	switch(tipo) {
+				    		case "FEATURE":
+								ci.iniciar();
+				    		break
+				    		case "DEVELOP":
+								cd.iniciar();
+				    		break
+				    	}
 		      		}
 				}
 	    	}
