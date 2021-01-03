@@ -67,9 +67,9 @@ def obtenerTipoDeRama(){
 	if(rama.contains("FEATURE")){
 		tipo = "FEATURE"
 	} else if(rama.contains("DEVELOP")){
-		tipo "DEVELOP";
+		tipo ="DEVELOP";
 	} else if(rama.contains("RELEASE")){
-		tipo "RELEASE";
+		tipo = "RELEASE";
 	} else {
 		return "RAMA NO SOPORTADA"
 	}
