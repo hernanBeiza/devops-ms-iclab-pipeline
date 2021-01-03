@@ -14,11 +14,13 @@ def call(){
 		        choices: "maven\ngradle",
 		        description: 'Parámetro que determinará si se ejecuta maven.groovy o gradle.groovy'
 	        )
+	        /*
 	        string(
 	        	name: 'paramRama',
 	        	defaultValue: '',
 	        	description: 'Ramas a ejecutar'
         	)
+        	*/
 	        string(
 	        	name: 'paramStage',
 	        	defaultValue: '',
@@ -27,31 +29,18 @@ def call(){
 		}
 
 		stages {
-			stage('Pipeline') {
+			stage('Validar') {
 				steps {
 			      	script {
-					    stage('iniciar') {
-					    	echo "iniciar";
-				    		String paramHerramienta = params.paramHerramienta.toLowerCase();
-				    		String paramRama = params.paramRama.toLowerCase();
-				    		String paramStage = params.paramStage;
-							//def validaciones = load 'validaciones.groovy'
-				    		if(validaciones.verificarRama(paramRama)){
-				    			echo "Rama válida";
-						    	if(validaciones.verificarHerramienta(paramHerramienta)){
-						    		echo "Herramienta válida";
-						    		if(paramHerramienta=="maven"){
-						    			maven.call(paramStage);
-						    		} else if(paramHerramienta=="gradle"){
-						    			gradle.call(paramStage);
-						    		}
-					    		} else {
-						    		echo "Herramienta no válida";
-					    		}
-					    	} else {
-				    			echo "Rama no válida";
-					    	}
-					    }
+				    	echo "iniciar"
+				    	env.ALUMNO="Hernán Beiza";
+						String paramHerramienta = params.paramHerramienta;
+				    	echo "paramHerramienta ${paramHerramienta}";
+						String paramStage = params.paramStage;
+				    	echo "paramStage ${paramStage}";
+
+				    	if(validaciones.verificarHerramienta(paramHerramienta)){}
+				    	if(validaciones.verificarArchivoHerramienta(paramHerramienta)){}
 		      		}
 				}
 	    	}

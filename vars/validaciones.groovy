@@ -1,12 +1,19 @@
+def verificarStages(tipo, paramStages){
+	echo "verificarStages ${tipo} ${paramStages}";
+	//Dependerá del tipo de pipeline, CD o CI
+}
+
 def verificarHerramienta(paramHerramienta){
 	echo "paramHerramienta ${paramHerramienta}";
 	env.ALUMNO="Hernán Beiza";
 	if(paramHerramienta=="maven"){
 		env.BUILD_TOOL="MAVEN";
+		echo "MAVEN soportado";
 		//maven.call();
 		return true;
 	} else if (paramHerramienta=="gradle"){
 		env.BUILD_TOOL="GRADLE";
+		echo "GRADLE soportado";
 		//Recordar que ahora los archivos están en vars
 		//gradle.call();
 		return true;
@@ -16,30 +23,39 @@ def verificarHerramienta(paramHerramienta){
 	}
 }
 
-def verificarRama(paramRama){
-	echo "paramRama ${paramRama}";
-	if(!paramRama.isEmpty()){
-		if(paramRama=="main" || paramRama=="master"){
-			return false;
-		} else {
+def verificarArchivoHerramienta(paramHerramienta){
+	sh "ls -l"
+	if(paramHerramienta=="maven"){
+		if (fileExists('pom.xml')) {
+			echo "Archivo pom.xml existe";
 			return true;
-		}		
-		/*
-		def prueba = sh (script:"git branch --list ${paramRama}", returnStdout: true).trim();
-		println prueba;
-
-		def existe = sh (script:"git show-ref refs/heads/${paramRama}", returnStdout: true).trim();
-		println "Rama existe: ${existe}";
-		if(existe.isEmpty()){
-			echo "No existe";
-			return false;
 		} else {
-			echo "Existe ${existe}";
-			return true;
+			echo "Archivo pom.xml no existe";
+			return false;
 		}
-		*/
+	} else if(paramHerramienta=="gradle"){
+		if (fileExists('settings.gradle')) {
+			echo "Archivo settings.gradle existe";
+			return true;
+		} else {
+			echo "Archivo settings.gradle no existe";
+			return false;
+		}
 	} else {
+		echo "Tipo de herramienta no soportada";
 		return false;
+	}
+}
+
+def verificarRama(){
+	echo "verificarRama";
+	def rama = BRANCH_NAME;
+	echo "NOMBRE RAMA: ${rama}";
+	if(rama=="main" || rama=="master"){
+		echo "Rama MAIN bloqueada";
+		return false;
+	} else {
+		return true;
 	}
 }
 
